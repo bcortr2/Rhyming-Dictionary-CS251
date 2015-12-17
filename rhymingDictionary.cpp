@@ -57,7 +57,7 @@ void convertToLowerCase( char theWord[], const int size)
 }
 
 
-//print a concise list of commands. Returns void.
+//print a concise list of commands.
 void printMenuBrief(){
 	cout << "Options:" << endl;
 	cout << "f str   Find str" << endl;
@@ -70,7 +70,7 @@ void printMenuBrief(){
 	return;
 }
 
-//print out the menu with full descriptions on input '?'. Returns void
+//print out the menu with full descriptions on input '?'.
 void printMenuFull(){
 	cout << "Menu Options: " << endl;
 	cout << "<f> <suffix> : Find the entered suffix within the dictionary" << endl;
@@ -100,12 +100,10 @@ void freeMem(node *&nRoot){
 //store a word into a trie using struct node. nRoot is the beginning of the trie; parentNode is
 //the parent of a given level's left child and right siblings; char word[] is the word to be stored;
 //length is the word length; counter is to check whether entire word has been stored (sent as hardcoded '0')
-//returns void
 void enterIntoTrie(node *&nRoot, node *parentNode, char word[MAX_WORD], int length, int counter){
 	//end of word reached
 	if (counter == length)
 		return;
-
 
 	//position for new, non-repeated (on a given level) letter found; create new node
 	if (nRoot == NULL ){
@@ -190,7 +188,7 @@ void printWord(node *currentNode){
 
 /*Find and print n words as chosen by user. Receives nRoot (root of trie),
 wordCounter (number of words chosen) and numCounter (sum of number of words chosen
-for this suffix so far). Returns void. */
+for this suffix so far) */
 void findWords(node *nRoot, int *wordCounter, int *numCounter){
 	if (*wordCounter-1 < 0)
 		return;
@@ -215,9 +213,7 @@ void findWords(node *nRoot, int *wordCounter, int *numCounter){
 }
 
 
-/*delete the chosen word by deleting nodes associated with the word. Receives node nRoot (head of trie), prevRightSib (previous
-right sibling node, so we can link to new right sib), prevLeftChild (so we can link to new left child),
-word array containing word to be deleted, and the length of the word. Returns void*/
+/*delete the chosen word by deleting nodes associated with the word. */
 void deleteNode(node *&nRoot, node *&prevRightSib,  node *&prevLeftChild, char word[MAX_WORD], int wordCounter, int length){
 	if (wordCounter == length - 1){
 		if (nRoot->leftMostChild != NULL){
@@ -267,8 +263,7 @@ int findSuffix(node *nRoot, node *&cursor,  char suffix[MAX_WORD], int suffixCou
 
 
 /* Check for valid input and reverse the string given by user. Receives char array
-str (suffix or word entered by user) and the sLength (length of string entered by user).
-Returns void. */
+str (suffix or word entered by user) and the sLength (length of string entered by user). */
 void checkAndReverseInput(char str[MAX_WORD], int sLength){
 
 	for (int i = 0; i < sLength; i++){
@@ -283,8 +278,7 @@ void checkAndReverseInput(char str[MAX_WORD], int sLength){
 
 
 /*compare suffix and word chosen to delete to differentiate for how to call
-delete node. Receives suffix char array, entered word array, and length of word. Returns
-boolean sameWord (true if same word, false if not) */
+delete node. Receives suffix char array, entered word array, and length of word. */
 bool compareWords(char suffix[MAX_WORD], char word[MAX_WORD], int length){
 	bool sameWord = false;
 	for (int i = 0; i < length; i++){
@@ -299,8 +293,7 @@ bool compareWords(char suffix[MAX_WORD], char word[MAX_WORD], int length){
 
 
 /* Controlling function. Determines which operation user wants to execute and calls
-appropriate functions. Prints the menu, loops until user wishes to quit. Receives nRoot (root
-of trie). Returns void. */
+appropriate functions. Prints the menu, loops until user wishes to quit. */
 void menuControl(node *nRoot){
 	int sLength = 0, numWords = 0, prevNumWords = 0, numWordsTemp = 0, prevNumTemp = 0;
 	int counter = 0;
@@ -405,7 +398,7 @@ void menuControl(node *nRoot){
 			printMenuFull();
 			break;
 
-		case 'x':           //quit/return to main
+		case 'x':           //quit
 			return;
 
 		default:            //user input not valid menu choice
@@ -428,9 +421,6 @@ int main(){
 	nRoot->rightSibling = NULL;
 	nRoot->parent = NULL;
 
-	cout << "Author: Brad Cortright" << endl;
-	cout << "Lab: Thurs, 11am; TA: Jia Li" << endl;
-	cout << "Program 6: Trie Harder" << endl;
 	cout << "   Using a trie to find, print, add and delete rhyming words via user input" << endl;
 	cout << "         *********************************************************" << endl;
 	cout << endl;
